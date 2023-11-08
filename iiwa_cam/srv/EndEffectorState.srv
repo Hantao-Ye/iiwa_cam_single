@@ -1,0 +1,17 @@
+string robot_name
+
+---
+bool success
+string error
+
+
+time stamp
+geometry_msgs/Pose pose       # end effector Pose at stamp (a time stamp)
+geometry_msgs/Twist velocity   # end effector Pose in last 50 ms
+int32 status
+
+# end effector Wrenches in last 50 ms (default size of 10)
+# sampled every 5 ms
+geometry_msgs/Wrench[] wrenches   
+
+

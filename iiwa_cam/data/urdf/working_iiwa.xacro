@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot name="global workspace" xmlns:xacro="http://ros.org/wiki/xacro">
+    <link name="world">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </link>
+
+    <!-- KUKA -->
+
+    <xacro:include filename="$(find iiwa_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find iiwa_description)/urdf/iiwa7.xacro" />
+
+    <xacro:include filename="$(find iiwa_cam)/data/urdf/paddle_gripper.xacro"/>
+    <xacro:include filename="$(find iiwa_cam)/data/urdf/circle_suction_gripper.xacro"/>
+
+    <xacro:arg name="hardware_interface" default="PositionJointInterface" />
+    <xacro:arg name="robot_name_1" default="iiwa_orange" />
+
+    <!--iiwa1-->
+    <xacro:iiwa7 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name_1)" parent="world">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:iiwa7>
+    <xacro:finger_gripper robot_name="$(arg robot_name_1)" parent="$(arg robot_name_1)_link_ee"/>
+
+</robot>

@@ -1,0 +1,7 @@
+# IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND,
+# UNLESS FOR REMOVING ENTRIES.
+# IF YOU WANT TO CHANGE THE ROS ENVIRONMENT VARIABLES
+# USE THE rosinstall TOOL INSTEAD.
+# IF YOU CHANGE IT, USE rosinstall FOR THE CHANGES TO TAKE EFFECT
+- git: {local-name: src/iiwa_stack_cam, uri: 'https://github.com/RROS-Lab/iiwa_stack_cam.git'}
+- git: {local-name: src/bio_ik, uri: 'https://github.com/PickNikRobotics/bio_ik.git'}

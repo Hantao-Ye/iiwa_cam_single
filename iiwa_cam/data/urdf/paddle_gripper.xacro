@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find iiwa_description)/urdf/utilities.xacro" />
+
+    <xacro:macro name="finger_gripper" params="robot_name parent">
+        <joint name="${robot_name}_finger_gripper_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${robot_name}_finger_gripper" />
+            <origin xyz="0 0 0" rpy="-1.5708 0 1.5708" />
+        </joint>
+
+        <link name="${robot_name}_finger_gripper">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="1.294" />
+                <inertia ixx="0.001112" ixy="0" ixz="0" iyy="0.000682" iyz="0" izz="0.001292" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001"
+                        filename="package://iiwa_cam/data/meshes/paddle_gripper_closed.stl" />
+                </geometry>
+                <material name="Grey" />
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001"
+                        filename="package://iiwa_cam/data/meshes/paddle_gripper_closed.stl" />
+                </geometry>
+                <material name="Grey" />
+            </collision>
+        </link>
+
+        <joint name="${robot_name}_finger_gripper_joint_ee" type="fixed">
+            <parent link="${robot_name}_finger_gripper" />
+            <child link="${robot_name}_gripper_ee" />
+            <origin xyz="0 -0.285 0" rpy="1.5708 0 0" />
+        </joint>
+
+        <link name="${robot_name}_gripper_ee" />
+
+    </xacro:macro>
+
+</robot>

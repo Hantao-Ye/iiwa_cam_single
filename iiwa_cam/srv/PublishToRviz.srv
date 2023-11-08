@@ -1,0 +1,5 @@
+iiwa_cam/GeneralTraj general_traj
+bool clean
+---
+bool success
+string error_msg

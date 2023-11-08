@@ -1,0 +1,33 @@
+<launch>
+    <arg name="real_robot_execution" default="false" />
+    <arg name="robot_name" default="iiwa" />
+
+    <!-- If force recording from the end effector is needed, please uncomment the following line to
+    set up the end effector parameter -->
+    <!-- <arg name="tool_name" default="gripper"/>
+    <param name="/iiwa_orange/toolName" type="string" value="$(arg tool_name)"/> -->
+
+    <!-- After generated the moveit config file with moveit setup assistant, please uncomment the
+    following line, and change the $(find screwdriving_moveit_config) to the correct folder -->
+    <!-- <include file="$(find screwdriving_moveit_config)/launch/demo.launch" >
+        <arg name="real_robot_execution" value="$(arg real_robot_execution)"/>
+    </include> -->
+
+    <node pkg="iiwa_cam" type="moveit_rviz_state_receiver_service"
+        name="moveit_rviz_state_receiver_service" args="$(arg robot_name)" output="screen"
+        if="$(arg real_robot_execution)" />
+
+    <node pkg="iiwa_cam" type="moveit_rviz_exec_service"
+        name="moveit_rviz_exec_service" args="$(arg robot_name)" output="screen"
+        if="$(arg real_robot_execution)" />
+
+    <node pkg="iiwa_cam" type="end_effector_state_service"
+        name="end_effector_state_service" args="$(arg robot_name)" output="screen"
+        if="$(arg real_robot_execution)" />
+
+    <node pkg="iiwa_cam" type="moveit_planning_demo" name="moveit_planning_demo"
+        args="$(arg robot_name)"
+        output="screen">
+        <param name="real_robot_execution" value="$(arg real_robot_execution)" />
+    </node>
+</launch>

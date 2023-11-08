@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find iiwa_description)/urdf/utilities.xacro" />
+
+    <xacro:macro name="suction_gripper" params="robot_name parent">
+        <joint name="${robot_name}_suction_gripper_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${robot_name}_suction_gripper" />
+            <origin xyz="0 0 0" rpy="3.14159 0 0" />
+        </joint>
+
+        <link name="${robot_name}_suction_gripper">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="1" />
+                <inertia ixx="14.200220680386701" ixy="0" ixz="0" iyy="13.966893322880225" iyz="0" izz="6.514512437531977" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://iiwa_cam/data/meshes/circle_suction_gripper.stl" />
+                </geometry>
+                <material name="Grey" />
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://iiwa_cam/data/meshes/circle_suction_gripper.stl" />
+                </geometry>
+                <material name="Grey" />
+            </collision>
+        </link>
+
+        <joint name="${robot_name}_suction_gripper_joint_ee" type="fixed">
+            <parent link="${robot_name}_suction_gripper" />
+            <child link="${robot_name}_gripper_ee" />
+            <origin xyz="0 0 -0.336" rpy="-3.14159 0 0" />
+        </joint>
+
+        <link name="${robot_name}_gripper_ee" />
+
+    </xacro:macro>
+
+</robot>

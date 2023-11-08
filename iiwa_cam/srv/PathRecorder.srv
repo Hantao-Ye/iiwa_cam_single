@@ -1,0 +1,7 @@
+string robot_name
+bool record
+bool watchdog 
+
+---
+bool success
+string error
