@@ -148,7 +148,6 @@ namespace moveit_planning
 
         moveit::core::RobotModelPtr robot_model_ptr_;
         moveit::planning_interface::PlanningSceneInterfacePtr planning_scene_interface_ptr_;
-        moveit::planning_interface::MoveGroupInterfacePtr move_group_ptr_;
         moveit_visual_tools::MoveItVisualToolsPtr visual_tools_ptr_;
 
         std::unordered_map<std::string, std::shared_ptr<iiwa_handler>> robot_handlers_;
@@ -370,7 +369,6 @@ namespace moveit_planning
     public:
         moveit_constructor(const std::vector<std::string> &robot_names, const moveit::core::RobotModelPtr robot_model, ros::NodeHandlePtr node_handle, bool real_robot_execution) : nh_ptr_(node_handle),
                                                                                                                                                                                     robot_model_ptr_(robot_model),
-                                                                                                                                                                                    move_group_ptr_(new moveit::planning_interface::MoveGroupInterface(constants::workspace::move_group_name)),
                                                                                                                                                                                     planning_scene_interface_ptr_(new moveit::planning_interface::PlanningSceneInterface()),
                                                                                                                                                                                     visual_tools_ptr_(new moveit_visual_tools::MoveItVisualTools(constants::workspace::origin_link, rviz_visual_tools::RVIZ_MARKER_TOPIC, robot_model_ptr_)),
                                                                                                                                                                                     real_robot_execution_(real_robot_execution)
@@ -380,9 +378,6 @@ namespace moveit_planning
             visual_tools_ptr_->enableBatchPublishing();
             visual_tools_ptr_->deleteAllMarkers();
             visual_tools_ptr_->trigger();
-
-            move_group_ptr_->setPlanningTime(constants::planning_time::fast);
-            move_group_ptr_->setNumPlanningAttempts(10);
 
             for (auto name : robot_names)
             {
