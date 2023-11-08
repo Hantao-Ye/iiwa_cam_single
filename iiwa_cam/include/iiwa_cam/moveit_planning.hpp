@@ -340,11 +340,6 @@ namespace moveit_planning
 
             ROS_INFO_STREAM("The trajectory point number is " << motion_sequence_res.response.planned_trajectories.back().joint_trajectory.points.size());
             publish_poses_and_trajectories(motion_sequence_res.response.planned_trajectories, target_poses, robot_name);
-            if (res.general_traj.attach_pkg)
-            {
-                auto pkg_pose = req.general_control.pkg_pose;
-                moveit_construct::add_package(pkg_pose, req.general_control.pkg_size, planning_scene_interface_ptr_.get(), constants::workspace::origin_link);
-            }
 
             res.general_traj.robot_name = robot_name;
 
@@ -356,10 +351,6 @@ namespace moveit_planning
 
             res.general_traj.wait_execution_finished = req.general_control.wait_execution_finished;
             res.general_traj.first_as_start = req.general_control.first_as_start;
-
-            res.general_traj.attach_pkg = req.general_control.attach_pkg;
-            res.general_traj.detach_pkg = req.general_control.detach_pkg;
-            res.general_traj.pkg_size = req.general_control.pkg_size;
 
             res.success = true;
 
